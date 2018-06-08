@@ -1,7 +1,7 @@
 (function() {
 
     var app = angular.module('starter', ['ionic']);
-    var urlRedditAPI = 'https://www.reddit.com/r/humor/.json';
+    var urlRedditAPI = 'https://www.reddit.com/r/pics/.json';
 
     app.controller('RedditController', function($scope, $http) {
         $scope.posts = [];
