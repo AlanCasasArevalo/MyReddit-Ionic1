@@ -7,7 +7,11 @@
         $scope.posts = [];
         $http.get(urlRedditAPI)
             .success(function(posts) {
-                console.log(posts);
+                // console.log(posts);
+                angular.forEach(posts.data.children, function(post) {
+                    $scope.posts.push(post.data);
+                    console.log(post);
+                });
             });
     });
 
