@@ -19,6 +19,8 @@
 
     <!-- your app's js -->
     <script src="js/app.js"></script>
+    <script src="lib/moment/moment.js"></script>
+    <script src="lib/angular-moment/angular-moment.js"></script>
 
 </head>
 
@@ -34,7 +36,7 @@
                 <a class="item item-thumbnail-left" ng-repeat="post in posts" href="{{ post.url }}" target="blank">
                     <img ng-src="{{ post.thumbnail }}" ng-if="post.thumbnail.indexOf('http') === 0">
                     <h2 class="post-title"> {{ post.title }} </h2>
-                    <p> {{ post.domain }} </p>
+                    <p> <span am-time-ago="post.created_utc | amFromUnix"> - {{ post.domain }} </p>
                 </a>
             </div>
 

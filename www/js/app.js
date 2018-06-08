@@ -1,6 +1,6 @@
 (function() {
 
-    var app = angular.module('starter', ['ionic']);
+    var app = angular.module('starter', ['ionic', 'angularMoment']);
     var urlRedditAPI = 'https://www.reddit.com/r/pics/.json';
 
     app.controller('RedditController', function($scope, $http) {
