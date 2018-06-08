@@ -1,12 +1,18 @@
 (function() {
 
     var app = angular.module('starter', ['ionic']);
+    var urlRedditAPI = 'https://www.reddit.com/r/humor/.json';
 
-    app.controller('RedditController', function($scope) {
-        $scope.posts = [
-            { title: 'Primer post' },
-            { title: 'Segundo post' }
-        ];
+    app.controller('RedditController', function($scope, $http) {
+        $scope.posts = [];
+        $http.get(urlRedditAPI)
+            .success(function(posts) {
+                // console.log(posts);
+                angular.forEach(posts.data.children, function(post) {
+                    $scope.posts.push(post.data);
+                    console.log(post);
+                });
+            });
     });
 
     app.run(function($ionicPlatform) {
