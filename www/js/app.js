@@ -1,11 +1,12 @@
 (function() {
 
     var app = angular.module('starter', ['ionic', 'angularMoment']);
-    var urlRedditAPI = 'https://www.reddit.com/r/pics/new/.json';
+    var urlRedditAPIGaming = 'https://www.reddit.com/r/gaming/new/.json';
+    var urlRedditAPIFunny = 'https://www.reddit.com/r/funny/new/.json';
 
     app.controller('RedditController', function($scope, $http) {
         $scope.posts = [];
-        $http.get(urlRedditAPI)
+        $http.get(urlRedditAPIGaming)
             .success(function(posts) {
                 // console.log(posts);
                 angular.forEach(posts.data.children, function(post) {
@@ -22,7 +23,7 @@
                 paramsFromURL['after'] = $scope.posts[$scope.posts.lenght - 1].name;
             }
 
-            $http.get(urlRedditAPI, { params: paramsFromURL })
+            $http.get(urlRedditAPIFunny, { params: paramsFromURL })
                 .success(function(posts) {
                     // console.log(posts);
                     angular.forEach(posts.data.children, function(post) {
@@ -34,6 +35,32 @@
 
                 });
         };
+
+        $scope.loadNewPost = function() {
+
+            if ($scope.posts.lenght > 0) {
+                var paramsFromURL = { 'before': $scope.posts[0].name };
+            } else {
+                return;
+            }
+
+            $http.get(urlRedditAPIGaming, { params: paramsFromURL })
+                .success(function(posts) {
+
+                    var newPosts = [];
+
+                    angular.forEach(posts.data.children, function(post) {
+                        newPosts.push(post.data);
+                    });
+
+                    $scope.posts = newPosts.concat($scope.posts);
+
+                    $scope.$broadcast('scroll.refreshComplete');
+
+                });
+
+        };
+
     });
 
     app.run(function($ionicPlatform) {
