@@ -1,15 +1,19 @@
-angular.module('starter', ['ionic'])
+(function() {
 
-.run(function($ionicPlatform) {
-    $ionicPlatform.ready(function() {
-        if (window.cordova && window.cordova.plugins.Keyboard) {
+    var app = angular.module('starter', ['ionic']);
 
-            cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+    app.run(function($ionicPlatform) {
+        $ionicPlatform.ready(function() {
+            if (window.cordova && window.cordova.plugins.Keyboard) {
 
-            cordova.plugins.Keyboard.disableScroll(true);
-        }
-        if (window.StatusBar) {
-            StatusBar.styleDefault();
-        }
+                cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+
+                cordova.plugins.Keyboard.disableScroll(true);
+            }
+            if (window.StatusBar) {
+                StatusBar.styleDefault();
+            }
+        });
     });
-})
+
+}());
