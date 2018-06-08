@@ -61,6 +61,10 @@
 
         };
 
+        $scope.openPostLink = function(url) {
+            window.open(url, 'blank');
+        };
+
     });
 
     app.run(function($ionicPlatform) {
@@ -71,6 +75,11 @@
 
                 cordova.plugins.Keyboard.disableScroll(true);
             }
+
+            if (window.cordova && window.cordova.InAppBrowser) {
+                window.open = cordova.InAppBrowser.open;
+            }
+
             if (window.StatusBar) {
                 StatusBar.styleDefault();
             }
